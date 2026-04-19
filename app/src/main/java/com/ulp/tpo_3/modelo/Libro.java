@@ -1,42 +1,101 @@
 package com.ulp.tpo_3.modelo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 import java.util.List;
 
-public class Libro implements Serializable {
-
-    private String nombre;
-    private String autor;
+public class Libro implements Parcelable {
+    private String key;
+    private String titulo;
+    private List<String> autores;
     private int cantPag; // Cantidad de páginas
     private int anioPub; // Año de publicación
-    private List<Categoria> categorias;
-    private String urlImg;
-    private String Sinopsis;
+    private List<String> subjects;
+    private String sinopsis;
 
-    public Libro(String nombre, String autor, int cantPag, int anioPub, List<Categoria> categorias, String urlImg, String sinopsis) {
-        this.nombre = nombre;
-        this.autor = autor;
+    public Libro(String key, String titulo, List<String> autores, int cantPag, int anioPub, List<String> subjects, String sinopsis) {
+        this.key = key;
+        this.titulo = titulo;
+        this.autores = autores;
         this.cantPag = cantPag;
         this.anioPub = anioPub;
-        this.categorias = categorias;
-        this.urlImg = urlImg;
-        Sinopsis = sinopsis;
+        this.subjects = subjects;
+        this.sinopsis = sinopsis;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Libro(String key, String titulo, List<String> autores, int anioPub) {
+        this.key = key;
+        this.titulo = titulo;
+        this.autores = autores;
+        this.anioPub = anioPub;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public Libro() {}
+
+    protected Libro(@NonNull Parcel in) {
+        key = in.readString();
+        titulo = in.readString();
+        autores = in.createStringArrayList();
+        cantPag = in.readInt();
+        anioPub = in.readInt();
+        subjects = in.createStringArrayList();
+        sinopsis = in.readString();
     }
 
-    public String getAutor() {
-        return autor;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public void setAutor(String autor) {
-        this.autor = autor;
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(key);
+        dest.writeString(titulo);
+        dest.writeStringList(autores);
+        dest.writeInt(cantPag);
+        dest.writeInt(anioPub);
+        dest.writeStringList(subjects);
+        dest.writeString(sinopsis);
+    }
+
+    public static final Creator<Libro> CREATOR = new Creator<Libro>() {
+        @Override
+        public Libro createFromParcel(Parcel in) {
+            return new Libro(in);
+        }
+
+        @Override
+        public Libro[] newArray(int size) {
+            return new Libro[size];
+        }
+    };
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public List<String> getAutores() {
+        return autores;
+    }
+
+    public void setAutores(List<String> autores) {
+        this.autores = autores;
     }
 
     public int getCantPag() {
@@ -55,27 +114,19 @@ public class Libro implements Serializable {
         this.anioPub = anioPub;
     }
 
-    public List<Categoria> getCategorias() {
-        return categorias;
+    public List<String> getSubjects() {
+        return subjects;
     }
 
-    public void setCategorias(List<Categoria> categorias) {
-        this.categorias = categorias;
-    }
-
-    public String getUrlImg() {
-        return urlImg;
-    }
-
-    public void setUrlImg(String urlImg) {
-        this.urlImg = urlImg;
+    public void setSubjects(List<String> subjects) {
+        this.subjects = subjects;
     }
 
     public String getSinopsis() {
-        return Sinopsis;
+        return sinopsis;
     }
 
     public void setSinopsis(String sinopsis) {
-        Sinopsis = sinopsis;
+        this.sinopsis = sinopsis;
     }
 }

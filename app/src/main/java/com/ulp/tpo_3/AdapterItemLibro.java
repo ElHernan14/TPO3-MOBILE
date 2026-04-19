@@ -1,0 +1,57 @@
+package com.ulp.tpo_3;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.ulp.tpo_3.modelo.Libro;
+import com.ulp.tpo_3.network.response.OpenLibraryResponse;
+
+import java.util.ArrayList;
+
+public class AdapterItemLibro extends RecyclerView.Adapter<AdapterItemLibro.ViewHolderItemLibro>{
+
+    private LayoutInflater inflater;
+    private ArrayList<Libro> list;
+
+    public AdapterItemLibro(ArrayList<Libro> list, LayoutInflater inflater) {
+        this.list = list;
+        this.inflater = inflater;
+    }
+
+    @NonNull
+    @Override
+    public ViewHolderItemLibro onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = inflater.inflate(R.layout.item, parent, false);
+        return new ViewHolderItemLibro(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolderItemLibro holder, int position) {
+        Libro i = list.get(position);
+
+        holder.title.setText(i.getTitulo());
+        holder.autor.setText(i.getAutores().get(0));
+    }
+
+    @Override
+    public int getItemCount() {
+        return list.size();
+    }
+
+    public class ViewHolderItemLibro extends RecyclerView.ViewHolder {
+
+        private TextView title, autor, anioPub;
+        public ViewHolderItemLibro(@NonNull View itemView) {
+            super(itemView);
+
+            title = itemView.findViewById(R.id.tvItemTitle);
+            autor = itemView.findViewById(R.id.tvItemAutor);
+            anioPub = itemView.findViewById(R.id.tvItemAnioPub);
+        }
+    }
+}
