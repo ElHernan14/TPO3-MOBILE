@@ -5,7 +5,11 @@ public enum Categoria {
     AVENTURA("Aventura"),
     ROMANCE("Romance"),
     TERROR("Terror"),
-    CIENCIAFICCION("Ciencia ficción");
+    CIENCIAFICCION("Ciencia ficción"),
+    MISTERIO("Misterio"),
+    DRAMA("Drama"),
+    CLASICO("Clásico"),
+    THRILLER("Thriller");
 
     private String nombre;
 

@@ -1,5 +1,7 @@
 package com.ulp.tpo_3;
 
+import static com.ulp.tpo_3.utils.Constantes.EXTRA_LIBRO;
+
 import android.app.Application;
 import android.content.Intent;
 import androidx.annotation.NonNull;
@@ -23,7 +25,7 @@ public class DetalleViewModel extends AndroidViewModel {
     }
 
     public void recuperarLibro(Intent intent) {
-        Libro libro = (Libro) intent.getSerializableExtra("libro");
+        Libro libro = (Libro) intent.getSerializableExtra(EXTRA_LIBRO);
         if (libro != null) {
             libroMutable.setValue(libro);
         }

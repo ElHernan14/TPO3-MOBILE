@@ -11,7 +11,7 @@ public class Libro implements Serializable {
     private int anioPub; // Año de publicación
     private List<Categoria> categorias;
     private String urlImg;
-    private String Sinopsis;
+    private String sinopsis;
 
     public Libro(String nombre, String autor, int cantPag, int anioPub, List<Categoria> categorias, String urlImg, String sinopsis) {
         this.nombre = nombre;
@@ -20,7 +20,7 @@ public class Libro implements Serializable {
         this.anioPub = anioPub;
         this.categorias = categorias;
         this.urlImg = urlImg;
-        Sinopsis = sinopsis;
+        this.sinopsis = sinopsis;
     }
 
     public String getNombre() {
@@ -72,10 +72,10 @@ public class Libro implements Serializable {
     }
 
     public String getSinopsis() {
-        return Sinopsis;
+        return sinopsis;
     }
 
     public void setSinopsis(String sinopsis) {
-        Sinopsis = sinopsis;
+        sinopsis = sinopsis;
     }
 }
