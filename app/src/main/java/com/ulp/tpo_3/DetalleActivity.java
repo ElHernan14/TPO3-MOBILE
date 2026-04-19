@@ -1,6 +1,9 @@
 package com.ulp.tpo_3;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -36,7 +39,7 @@ public class DetalleActivity extends AppCompatActivity {
         binding.tvPaginas.setText(libro.getCantPag() + " pág");
         binding.tvAnio.setText(String.valueOf(libro.getAnioPub()));
         binding.tvSinopsis.setText(libro.getSinopsis());
-        //Imagen URL pública externa carga con dependencia GLIDE.
+        
         Glide.with(this)
                 .load(libro.getUrlImg())
                 .placeholder(R.drawable.loading)
@@ -46,13 +49,22 @@ public class DetalleActivity extends AppCompatActivity {
                 .thumbnail(0.25f)
                 .transition(DrawableTransitionOptions.withCrossFade(500))
                 .into(binding.ivPortada);
-        //Listado Categorías
+
         binding.llCategorias.removeAllViews();
         for (Categoria cat : libro.getCategorias()) {
             TextView tvCat = new TextView(this);
             tvCat.setText(cat.getNombre());
-            tvCat.setPadding(8, 4, 8, 4);
-            // Estilo simple para las categorías
+            tvCat.setBackgroundResource(R.drawable.bg_categoria);
+            tvCat.setTextColor(Color.parseColor("#1565C0")); // Azul oscuro para el texto
+            tvCat.setTextSize(14);
+            
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            );
+            params.setMargins(0, 0, 16, 0);
+            tvCat.setLayoutParams(params);
+
             binding.llCategorias.addView(tvCat);
         }
     }
