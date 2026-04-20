@@ -8,8 +8,11 @@ import java.util.List;
 public class LibroMapper {
 
     public static Libro fromDoc(OpenLibraryResponse.Doc doc) {
-
         String key = doc.key;
+
+        if(doc.key.contains("works")) {
+            key = key.substring(key.lastIndexOf("/") + 1);
+        }
 
         String titulo = doc.title;
 
