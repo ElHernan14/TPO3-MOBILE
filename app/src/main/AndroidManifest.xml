@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TPO3">
         <activity
+            android:name=".TerceraActivity"
+            android:exported="false" />
+        <activity
             android:name=".SegundaActivity"
             android:exported="false" />
         <activity

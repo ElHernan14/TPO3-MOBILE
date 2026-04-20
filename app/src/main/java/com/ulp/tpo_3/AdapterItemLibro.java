@@ -1,5 +1,8 @@
 package com.ulp.tpo_3;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +39,13 @@ public class AdapterItemLibro extends RecyclerView.Adapter<AdapterItemLibro.View
 
         holder.title.setText(i.getTitulo());
         holder.autor.setText(i.getAutores().get(0));
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), TerceraActivity.class);
+            intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("libro", i);
+            v.getContext().startActivity(intent);
+        });
     }
 
     @Override
