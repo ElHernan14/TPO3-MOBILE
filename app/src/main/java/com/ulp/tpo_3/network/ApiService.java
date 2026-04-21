@@ -1,6 +1,6 @@
 package com.ulp.tpo_3.network;
-import com.ulp.tpo_3.network.response.OpenLibraryResponse;
-import com.ulp.tpo_3.network.response.WorkResponse;
+import com.ulp.tpo_3.modelo.OpenLibraryResponse;
+import com.ulp.tpo_3.modelo.WorkResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -12,7 +12,10 @@ public interface ApiService {
 
     //endpoint para buscar libros
     @GET("search.json")
-    Call<OpenLibraryResponse> buscarLibro(@Query("q") String query);
+    Call<OpenLibraryResponse> buscarLibro(
+            @Query("title") String query,
+            @Query("page") int page
+    );
 
     //endpoint para obtener detalles del libro
     @GET("works/{keyBook}.json")

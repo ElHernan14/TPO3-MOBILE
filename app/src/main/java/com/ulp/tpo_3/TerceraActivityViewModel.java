@@ -8,10 +8,10 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.ulp.tpo_3.modelo.Libro;
+import com.ulp.tpo_3.modelo.OpenLibraryResponse;
 import com.ulp.tpo_3.network.ApiService;
 import com.ulp.tpo_3.network.RetrofitClient;
-import com.ulp.tpo_3.network.response.WorkResponse;
+import com.ulp.tpo_3.modelo.WorkResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,25 +19,26 @@ import retrofit2.Response;
 
 public class TerceraActivityViewModel extends AndroidViewModel {
     private ApiService api = RetrofitClient.getApiService();
-    private MutableLiveData<Libro> libro = new MutableLiveData<>();
+    private MutableLiveData<OpenLibraryResponse.Doc> libro = new MutableLiveData<>();
+    private MutableLiveData<WorkResponse> detallesLibro = new MutableLiveData<>();
     public TerceraActivityViewModel(@NonNull Application application) {
         super(application);
     }
-
-    public LiveData<Libro> getLibro() {
+    public LiveData<OpenLibraryResponse.Doc> getLibro() {
         return libro;
     }
-
+    public MutableLiveData<WorkResponse> getDetallesLibro() {
+        return detallesLibro;
+    }
     public void recuperarLibro(Intent intent){
-        Libro libroRecuperado = intent.getParcelableExtra("libro");
+        OpenLibraryResponse.Doc libroRecuperado = (OpenLibraryResponse.Doc) intent.getSerializableExtra("libro");
+        libro.setValue(libroRecuperado);
+
         api.obtenerDetallesLibro(libroRecuperado.getKey()).enqueue(new Callback<WorkResponse>() {
             @Override
             public void onResponse(Call<WorkResponse> call, Response<WorkResponse> response) {
                 if(response.isSuccessful()) {
-                    libroRecuperado.setSubjects(response.body().getSubjects());
-                    libroRecuperado.setSinopsis(response.body().getDescription());
-
-                    libro.setValue(libroRecuperado);
+                    detallesLibro.setValue(response.body());
                 }
             }
 

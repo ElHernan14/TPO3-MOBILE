@@ -5,42 +5,103 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingHorizontal="10sp"
+    android:paddingVertical="10sp"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/tvTitleBuscador"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="224dp"
+        android:layout_marginTop="4dp"
         android:text="@string/title_buscador_libros"
         android:textAlignment="center"
         android:textSize="36dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etBuscador"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="@string/hint_buscador"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitleBuscador" />
 
     <Button
         android:id="@+id/btnBuscar"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="28dp"
+        android:allowClickWhenDisabled="false"
         android:text="@string/btn_buscar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etBuscador" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvListaItem"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCantResultado" />
+
+    <TextView
+        android:id="@+id/tvCantResultado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnBuscar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvListaItem">
+
+        <Button
+            android:id="@+id/btnAtras"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Anterior"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/tvPageActual"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="1/100"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/btnSiguiente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Siguiente"
+            android:visibility="invisible" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,17 +11,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ulp.tpo_3.modelo.Libro;
-import com.ulp.tpo_3.network.response.OpenLibraryResponse;
+import com.ulp.tpo_3.modelo.OpenLibraryResponse;
 
 import java.util.ArrayList;
 
 public class AdapterItemLibro extends RecyclerView.Adapter<AdapterItemLibro.ViewHolderItemLibro>{
 
     private LayoutInflater inflater;
-    private ArrayList<Libro> list;
+    private ArrayList<OpenLibraryResponse.Doc> list;
 
-    public AdapterItemLibro(ArrayList<Libro> list, LayoutInflater inflater) {
+    public AdapterItemLibro(ArrayList<OpenLibraryResponse.Doc> list, LayoutInflater inflater) {
         this.list = list;
         this.inflater = inflater;
     }
@@ -35,10 +34,11 @@ public class AdapterItemLibro extends RecyclerView.Adapter<AdapterItemLibro.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderItemLibro holder, int position) {
-        Libro i = list.get(position);
+        OpenLibraryResponse.Doc i = list.get(position);
 
-        holder.title.setText(i.getTitulo());
-        holder.autor.setText(i.getAutores().get(0));
+        holder.title.setText(i.title);
+        holder.autor.setText(i.getAutores());
+        holder.anioPub.setText(i.getStringFirstPublishYear());
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), TerceraActivity.class);
@@ -61,7 +61,7 @@ public class AdapterItemLibro extends RecyclerView.Adapter<AdapterItemLibro.View
 
             title = itemView.findViewById(R.id.tvItemTitle);
             autor = itemView.findViewById(R.id.tvItemAutor);
-            anioPub = itemView.findViewById(R.id.tvItemAnioPub);
+            anioPub = itemView.findViewById(R.id.tvItemAnioPug);
         }
     }
 }

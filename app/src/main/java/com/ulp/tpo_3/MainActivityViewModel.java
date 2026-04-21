@@ -7,16 +7,15 @@ import android.content.Intent;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
-import com.ulp.tpo_3.modelo.Libro;
 import com.ulp.tpo_3.network.ApiService;
 import com.ulp.tpo_3.network.RetrofitClient;
-import com.ulp.tpo_3.network.mapper.LibroMapper;
-import com.ulp.tpo_3.network.response.OpenLibraryResponse;
+import com.ulp.tpo_3.modelo.OpenLibraryResponse;
 
-import java.io.Serializable;
+
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,39 +23,39 @@ import retrofit2.Response;
 
 public class MainActivityViewModel extends AndroidViewModel {
     private ApiService api = RetrofitClient.getApiService();
+    private MutableLiveData<OpenLibraryResponse> opl = new MutableLiveData<>();
     public MainActivityViewModel(@NonNull Application application) {
         super(application);
     }
 
-     public void buscarLibro(String nombre) {
+    public LiveData<OpenLibraryResponse> getOpl() {
+        return opl;
+    }
 
-        api.buscarLibro(nombre).enqueue(new Callback<OpenLibraryResponse>() {
-            @Override
-            public void onResponse(Call<OpenLibraryResponse> call, Response<OpenLibraryResponse> response) {
-                if(response.isSuccessful()) {
-                    ArrayList<Libro> libros = new ArrayList<>();
-
-                    if(response.body() == null) {
-                        return;
+    public void buscarLibro(String nombre, int page) {
+        if(nombre != null && !nombre.isEmpty()) {
+            api.buscarLibro(nombre, page).enqueue(new Callback<OpenLibraryResponse>() {
+                @Override
+                public void onResponse(Call<OpenLibraryResponse> call, Response<OpenLibraryResponse> response) {
+                    if(response.isSuccessful()) {
+                        if(response.body() != null) {
+                            response.body().titleSearch = nombre;
+                            opl.setValue(response.body());
+                        }
                     }
+                }
 
-                    for (OpenLibraryResponse.Doc libroDoc : response.body().docs) {
-                        Libro libro = LibroMapper.fromDoc(libroDoc);
-                        libros.add(libro);
-                    }
-
-                    Intent i = new Intent(getApplication(), SegundaActivity.class);
-                    i.setFlags(FLAG_ACTIVITY_NEW_TASK);
-                    i.putParcelableArrayListExtra("libros", libros);
-                    getApplication().startActivity(i);
+                @Override
+                public void onFailure(Call<OpenLibraryResponse> call, Throwable t) {
 
                 }
-            }
+            });
+        }
+    }
 
-            @Override
-            public void onFailure(Call<OpenLibraryResponse> call, Throwable t) {
-
-            }
-        });
+    public void cambiarPage(int accion) {
+        if(opl.getValue() != null) {
+            buscarLibro(opl.getValue().titleSearch, opl.getValue().getPageActual() + accion);
+        }
     }
 }

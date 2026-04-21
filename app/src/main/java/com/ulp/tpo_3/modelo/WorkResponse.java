@@ -1,4 +1,4 @@
-package com.ulp.tpo_3.network.response;
+package com.ulp.tpo_3.modelo;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -8,11 +8,9 @@ import java.util.List;
 public class WorkResponse {
     private List<String> subjects;
     private JsonElement description;
-
     public List<String> getSubjects() {
         return subjects;
     }
-
     public String getDescription() {
         if(description == null) return null;
 

@@ -2,46 +2,36 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginVertical="10dp"
     app:cardBackgroundColor="#8CB7E4"
-    app:cardCornerRadius="30dp"
+    app:cardCornerRadius="10dp"
     app:contentPadding="10dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/fondo">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tvItemTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textSize="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="Titulo del libro"
+            android:textSize="16dp" />
 
         <TextView
             android:id="@+id/tvItemAutor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="TextView"
-            android:textSize="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/tvItemTitle"
-            tools:layout_editor_absoluteX="0dp" />
+            android:text="Autores" />
 
         <TextView
-            android:id="@+id/tvItemAnioPub"
+            android:id="@+id/tvItemAnioPug"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="TextView"
-            android:textSize="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/tvItemAutor"
-            tools:layout_editor_absoluteX="0dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:text="Anio de publicacion del libro" />
+    </LinearLayout>
 </androidx.cardview.widget.CardView>
