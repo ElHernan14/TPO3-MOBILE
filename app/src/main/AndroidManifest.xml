@@ -17,9 +17,6 @@
             android:name=".TerceraActivity"
             android:exported="false" />
         <activity
-            android:name=".SegundaActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -21,12 +21,24 @@ public class TerceraActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         binding = ActivityTerceraBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main, (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(
+                    systemBars.left,
+                    systemBars.top,
+                    systemBars.right,
+                    systemBars.bottom
+            );
+            return insets;
+        });
         vm = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(TerceraActivityViewModel.class);
 
         vm.getLibro().observe(this,libro -> {
             binding.tvTitle.setText(libro.title);
+            binding.tvAutores.setText("Autores: " + libro.getAutores());
             binding.tvAnioPug.setText(libro.getStringFirstPublishYear());
 
             Glide.with(this)
@@ -37,7 +49,8 @@ public class TerceraActivity extends AppCompatActivity {
         });
 
         vm.getDetallesLibro().observe(this, detallesLibro -> {
-            binding.tvSinopsis.setText(detallesLibro.getDescription());
+            binding.tvTemas.setText("Temas: " + detallesLibro.getSubjects());
+            binding.tvDescripcion.setText(detallesLibro.getDescription());
         });
 
         Intent intent = getIntent();

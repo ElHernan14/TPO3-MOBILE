@@ -8,11 +8,8 @@ import java.util.List;
 public class WorkResponse {
     private List<String> subjects;
     private JsonElement description;
-    public List<String> getSubjects() {
-        return subjects;
-    }
     public String getDescription() {
-        if(description == null) return null;
+        if(description == null) return "";
 
         if(description.isJsonPrimitive()) return description.getAsString();
 
@@ -23,6 +20,11 @@ public class WorkResponse {
             }
         }
 
-        return null;
+        return "";
+    }
+    public String getSubjects() {
+        if(subjects != null && !subjects.isEmpty()) return String.join(", ", subjects);
+
+        return "";
     }
 }

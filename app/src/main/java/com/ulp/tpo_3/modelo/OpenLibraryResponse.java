@@ -22,26 +22,22 @@ public class OpenLibraryResponse {
         private Integer first_publish_year;
 
         public String getKey() {
-            if(key == null) return null;
-
-            if(key.contains("works")) {
+            if(key != null && !key.isEmpty()){
+                // esto deberia tener algo como: /works/OL15626917W
                 return key.substring(key.lastIndexOf("/") + 1);
             }
 
-            return key;
+            return "";
         }
         public String getAutores() {
-            if(author_name == null) return "";
-            if(author_name.isEmpty()) return "";
-            return String.join(" ", author_name);
-        }
-        public int getIntFirstPublishYear() {
-            if(first_publish_year == null) return 0;
-            return first_publish_year;
+            if(author_name != null && !author_name.isEmpty()) return String.join(" ", author_name);
+
+            return "";
         }
         public String getStringFirstPublishYear() {
-            if(first_publish_year == null) return "";
-            return String.valueOf(first_publish_year);
+            if(first_publish_year != null) return String.valueOf(first_publish_year);
+
+            return "";
         }
     }
 }

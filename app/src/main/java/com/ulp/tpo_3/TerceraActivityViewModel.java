@@ -2,6 +2,7 @@ package com.ulp.tpo_3;
 
 import android.app.Application;
 import android.content.Intent;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -44,7 +45,7 @@ public class TerceraActivityViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(Call<WorkResponse> call, Throwable t) {
-                //desa
+                Log.d("ERROR API OBTENERDETALLESLIBRO", t.toString());
             }
         });
     }

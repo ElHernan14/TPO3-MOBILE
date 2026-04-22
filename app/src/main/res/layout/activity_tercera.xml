@@ -9,27 +9,20 @@
     android:paddingVertical="10dp"
     tools:context=".TerceraActivity">
 
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="192dp"
-        android:layout_height="222dp"
+    <ImageView
+        android:id="@+id/ivImgLibro"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/ivImgLibro"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:srcCompat="@tools:sample/avatars" />
-    </FrameLayout>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="210dp"
+        android:id="@+id/linearLayout"
+        android:layout_width="220dp"
+        android:layout_height="200dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toEndOf="@+id/frameLayout"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -40,10 +33,27 @@
             android:textSize="18dp" />
 
         <TextView
+            android:id="@+id/tvAutores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Autores" />
+
+        <TextView
             android:id="@+id/tvAnioPug"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Fecha de publicacion" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvTemas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="temas" />
+        </ScrollView>
 
     </LinearLayout>
 
@@ -51,23 +61,28 @@
         android:id="@+id/tvSinopsis"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="Sipnopsis"
         android:textSize="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-    <TextView
-        android:id="@+id/tvDescripcion"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="8dp"
-        android:text="Sinopsis del libro"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSinopsis" />
+        app:layout_constraintTop_toBottomOf="@+id/tvSinopsis">
+
+        <TextView
+            android:id="@+id/tvDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Sinopsis del libro" />
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

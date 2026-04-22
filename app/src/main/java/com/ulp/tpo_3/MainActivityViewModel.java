@@ -4,6 +4,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 import android.app.Application;
 import android.content.Intent;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -47,7 +48,7 @@ public class MainActivityViewModel extends AndroidViewModel {
 
                 @Override
                 public void onFailure(Call<OpenLibraryResponse> call, Throwable t) {
-
+                    Log.d("ERROR API BUSCARLIBRO", t.toString());
                 }
             });
         }
